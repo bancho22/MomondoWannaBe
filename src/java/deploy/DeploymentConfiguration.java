@@ -15,7 +15,7 @@ import security.PasswordHash;
 @WebListener
 public class DeploymentConfiguration implements ServletContextListener {
 
-    public static String PU_NAME = "CA3PU"; //USE the RIGHT name here
+    public static String PU_NAME = "3rdSemesterProjectPU"; //USE the RIGHT name here
 
     public void contextInitialized(ServletContextEvent sce) {
         Map<String, String> env = System.getenv();     //If we are running in the OPENSHIFT environment change the pu-name     
