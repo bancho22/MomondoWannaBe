@@ -18,7 +18,8 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         });
 
-
+                        $scope.output = {};
+                        
                 $scope.airport = [{
                         id: 1,
                         label: 'Copenhagen',
@@ -28,7 +29,7 @@ angular.module('myApp.view1', ['ngRoute'])
                         label: 'Berlin',
                         name: 'SXF'
                     }];
-                $scope.output = {};
+                
 
                 $scope.getFlight = function () {
                     return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirport.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,

@@ -2,10 +2,10 @@
 
 
 <div  ng-controller="View1Ctrl">
-    <form role="form" ng-submit="getFlight()" >
+    <form role="form" ng-submit="getFlight()">
         From:
         <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirport" ></select>
-<br>
+        <br>
 
 
         Departure date:
@@ -20,25 +20,16 @@
         <button type="submit" class="btn btn-success">Search</button>
     </form>
 
-
-
-
-
     <uib-accordion>
-        <uib-accordion-group ng-repeat="flight in output" >
-            <uib-accordion-heading  ng-repeat="actual in flight.flights">
-                {{actual.destination}}
+        <uib-accordion-group ng-repeat="flight in output.flights" >
+            <uib-accordion-heading>
+                {{flight.destination}}
             </uib-accordion-heading>
-            <ul ng-repeat="details in flight.flights">
-
-                <li><b>Date:</b> {{details.date}} </li>
-                <li><b>Seats available:</b> {{details.numberOfSeats}} </li>
-                <li><b>Price:</b> {{details.totalPrice}} </li>
-
-
-
-
-            </ul>
+            <ul>
+                <li><b>Price: </b> {{flight.totalPrice}} </li>
+                
+                
+                </ul>
         </uib-accordion-group>
     </uib-accordion>
 </div>
