@@ -5,11 +5,16 @@
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>Please sign up</title>
+        <title>Sign up here</title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="container">
-            <section id="content">
+            <div id="login-form">
+
+    <h3>Login</h3>
+
+    <fieldset>
                 <div ng-controller="View3Ctrl">
                     <form  role="form" ng-submit="post()"  >
                         <div class="form-group">
@@ -24,8 +29,10 @@
                         
                     </form>
                 </div>
+    </fieldset>
 
-            </section>
+            
+        </div>
         </div>
     </body>
 </html>
