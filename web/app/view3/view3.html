@@ -16,17 +16,19 @@
 
     <fieldset>
                 <div ng-controller="View3Ctrl">
-                    <form  role="form" ng-submit="post()"  >
-                        <div class="form-group">
-                            <input type="text" style="width:10em;" placeholder="User name" class="form-control"
-                                   ng-model="user.userName">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" style="width:10em;" placeholder="Password" class="form-control"
-                                   ng-model="user.password">
-                        </div>
-                        <button type="submit" class="btn btn-success">Sign up</button>
-                        
+                    <form role="form" ng-submit="book()"><pre>
+        First Name: <input type="text" name="fname" ng-model="fname">
+
+        Last Name:  <input type="text" name="lname" ng-model="lname">
+
+        Adress:     <input type="text" name="address" ng-model="address">
+
+        City:       <input type="text" name="city" ng-model="city">    ZIP:  <input type="text" name="zip" ng-model="zip">
+
+        Country:    <input type="text" name="country" ng-model="country">
+
+
+                    <button type="submit" class="btn btn-success">Submit Order</button>  </pre>  
                     </form>
                 </div>
     </fieldset>
