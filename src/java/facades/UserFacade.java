@@ -12,7 +12,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import security.PasswordHash;
-
+/**
+ *
+ * @author Mato
+ */
 public class UserFacade {
 
     private EntityManagerFactory emf;

@@ -23,15 +23,15 @@
 
     <uib-accordion>
          <div ng-repeat="flight in output">
-        <uib-accordion-group heading="{{single.destination}}" ng-repeat="single in flight.flights ">
+             <uib-accordion-group heading="{{single.destination}}" ng-repeat="single in flight.flights " ng-model="destinationChosen">
            
 
                 
                 <ul>
                     
                     <li><b>Seats available: </b> {{single.numberOfSeats}} </li>
-                    <li><b>Duration: </b> {{single.traveltime}} </li>
-                    <li><b>Price: </b> {{single.totalPrice}} </li>
+                    <li ng-model="seatsWanted"><b>Duration: </b> {{single.traveltime}} </li>
+                    <li ng-model="price"><b>Price: </b> {{single.totalPrice}} </li>
                     
                     <a href="#view2"><button type="submit" class="btn btn-success">Book</button>
                 </ul>
