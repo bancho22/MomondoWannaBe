@@ -19,23 +19,17 @@
 
         <button type="submit" class="btn btn-success">Search</button>
     </form>
-    <br>
 
     <uib-accordion>
-         <div ng-repeat="flight in output">
-        <uib-accordion-group heading="{{single.destination}}" ng-repeat="single in flight.flights ">
-           
-
+        <uib-accordion-group ng-repeat="flight in output.flights" >
+            <uib-accordion-heading>
+                {{flight.destination}}
+            </uib-accordion-heading>
+            <ul>
+                <li><b>Price: </b> {{flight.totalPrice}} </li>
                 
-                <ul>
-                    
-                    <li><b>Seats available: </b> {{single.numberOfSeats}} </li>
-                    <li><b>Duration: </b> {{single.traveltime}} </li>
-                    <li><b>Price: </b> {{single.totalPrice}} </li>
-                    
-                    <a href="#view3"><button type="submit" class="btn btn-success">Book</button>
+                
                 </ul>
-            </div>
         </uib-accordion-group>
     </uib-accordion>
 </div>

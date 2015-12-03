@@ -18,7 +18,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         });
 
-                        
+                        $scope.output = {};
                         
                 $scope.airport = [{
                         id: 1,
@@ -33,7 +33,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 $scope.getFlight = function () {
                     return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirport.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
-                        contentType: "application/json"}).success(function (data) {
+                        contentType: "application/json"}).success(function (data, status, headers, config) {
 
                         $scope.output = data;
 
