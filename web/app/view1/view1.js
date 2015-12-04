@@ -24,11 +24,29 @@ angular.module('myApp.view1', ['ngRoute'])
                         id: 1,
                         label: 'Copenhagen',
                         name: 'CPH'
-                    }, {
+                    }
+                    , {
                         id: 2,
                         label: 'Berlin',
                         name: 'SXF'
-                    }];
+                    }
+                    , {
+                        id: 3,
+                        label: 'Barcelona',
+                        name: 'BCN'
+                    }
+                    , {
+                        id: 4,
+                        label: 'Paris',
+                        name: 'CDG'
+                    }
+                    , {
+                        id: 5,
+                        label: 'London',
+                        name: 'STN'
+                    }
+                    
+                ];
 
 
                 $scope.getFlight = function () {
