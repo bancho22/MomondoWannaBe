@@ -4,9 +4,11 @@
 <div  ng-controller="View1Ctrl">
     <form role="form" ng-submit="getFlight()">
         From:
-        <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirport" ></select>
+        <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirportOrigin" ></select>
         <br>
-
+        *To:
+        <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirportDestination" ></select>
+        <br>
 
         Departure date:
         <input type="date" name="date" ng-model="date"><br>

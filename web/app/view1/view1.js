@@ -18,8 +18,8 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         });
 
-                        
-                        
+
+
                 $scope.airport = [{
                         id: 1,
                         label: 'Copenhagen',
@@ -29,11 +29,24 @@ angular.module('myApp.view1', ['ngRoute'])
                         label: 'Berlin',
                         name: 'SXF'
                     }];
-                
+
 
                 $scope.getFlight = function () {
-                    return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirport.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
-                        contentType: "application/json"}).success(function (data) {
+                    if ($scope.chosenAirportDestination === undefined) {
+                        return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
+                            contentType: "application/json"}).success(function (data) {
+
+                            $scope.output = data;
+
+
+                        }).
+                                error(function (data, status, headers, config) {
+
+                                });
+                    }
+                    else{
+                    return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + "/" + $scope.chosenAirportDestination.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
+                            contentType: "application/json"}).success(function (data) {
 
                         $scope.output = data;
 
@@ -42,7 +55,9 @@ angular.module('myApp.view1', ['ngRoute'])
                             error(function (data, status, headers, config) {
 
                             });
+                    };
                 };
+
 
 
 
