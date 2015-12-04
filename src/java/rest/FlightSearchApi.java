@@ -57,7 +57,7 @@ public class FlightSearchApi {
     public Response getFlightResults2(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date, @PathParam("numTickets") String numTickets) throws NoFlightsFoundException{
         
         List<String> flightsByAirlines = searchEngine.findFlights(from, to, date, numTickets);
-        
+
         if(flightsByAirlines.isEmpty()){
             throw new NoFlightsFoundException();
         }
