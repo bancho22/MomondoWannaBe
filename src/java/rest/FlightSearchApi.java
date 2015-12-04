@@ -54,7 +54,7 @@ public class FlightSearchApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{from}/{to}/{date}/{numTickets}")
-    public Response getFlightResults2(@PathParam("from") String from, @PathParam("from") String to, @PathParam("date") String date, @PathParam("numTickets") String numTickets) throws NoFlightsFoundException{
+    public Response getFlightResults2(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date, @PathParam("numTickets") String numTickets) throws NoFlightsFoundException{
         
         List<String> flightsByAirlines = searchEngine.findFlights(from, to, date, numTickets);
         
