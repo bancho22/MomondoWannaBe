@@ -9,7 +9,24 @@ angular.module('myApp.view2', ['ngRoute'])
             });
           }])
 
-        .controller('View2Ctrl', function ($http, $scope) {
-          
+        .controller('View2Ctrl', ["$scope", "$http",function ($http, $scope) { 
+            
+            
+          var book = function(){
+              alert("inside");
+             var user = {};
 
-        });
+                    $http({method: 'POST', url: 'api/booking',
+                        contentType: "application/json", data: JSON.stringify($scope.user)}).
+                            success(function (data, status, headers, config) {
+                                 alert($scope.user.userName + " booked");
+                                
+
+                            }).
+                            error(function (data, status, headers, config) {
+                                    "Something weng wrong try again."
+                            });
+ 
+          }
+
+        }]);
