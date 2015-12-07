@@ -10,15 +10,6 @@ angular.module('myApp.view1', ['ngRoute'])
 
 
         .controller('View1Ctrl', ["$scope", "$http", function ($scope, $http) {
-                $http.get('api/flightinfo')
-                        .success(function (data, status, headers, config) {
-                            $scope.data = data;
-                        })
-                        .error(function (data, status, headers, config) {
-
-                        });
-
-
 
                 $scope.airport = [{
                         id: 1,
@@ -64,7 +55,9 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         }).
                                 error(function (data, status, headers, config) {
-                                    alert("No flights available");
+                                    //alert(data.msg);
+                                    alert("No flights found");
+                                    $scope.output = [];
                                 });
                     }
                     else {
@@ -79,7 +72,9 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         }).
                                 error(function (data, status, headers, config) {
-                                    alert("No flights available");
+                                    //alert(data.msg);
+                                    alert("No flights found");
+                                    $scope.output = [];
                                 });
                     }
                     ;
