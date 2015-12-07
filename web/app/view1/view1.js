@@ -45,7 +45,7 @@ angular.module('myApp.view1', ['ngRoute'])
                         label: 'London',
                         name: 'STN'
                     }
-                    
+
                 ];
 
 
@@ -54,26 +54,35 @@ angular.module('myApp.view1', ['ngRoute'])
                         return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
                             contentType: "application/json"}).success(function (data) {
 
+
+
                             $scope.output = data;
+
+
+
 
 
                         }).
                                 error(function (data, status, headers, config) {
-
+                                    alert("No flights available");
                                 });
                     }
-                    else{
-                    return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + "/" + $scope.chosenAirportDestination.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
+                    else {
+                        return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + "/" + $scope.chosenAirportDestination.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
                             contentType: "application/json"}).success(function (data) {
 
-                        $scope.output = data;
 
 
-                    }).
-                            error(function (data, status, headers, config) {
+                            $scope.output = data;
 
-                            });
-                    };
+
+
+                        }).
+                                error(function (data, status, headers, config) {
+                                    alert("No flights available");
+                                });
+                    }
+                    ;
                 };
 
 
