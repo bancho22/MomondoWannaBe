@@ -1,6 +1,8 @@
 package deploy;
 
+import entity.Airline;
 import entity.User;
+import facades.AirlineFacade;
 import facades.UserFacade;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -22,12 +24,7 @@ public class DeploymentConfiguration implements ServletContextListener {
         if (env.keySet().contains("OPENSHIFT_MYSQL_DB_HOST")) {
             PU_NAME = "pu_OPENSHIFT";
             try {
-                UserFacade uf = new UserFacade();
-                User user = new User();
-                user.setUserName("user");
-                user.setPasswordHash(PasswordHash.createHash("test"));
-                user.addRole("User");
-                uf.addUser(user);
+                setUpTables();
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(DeploymentConfiguration.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvalidKeySpecException ex) {
@@ -39,6 +36,31 @@ public class DeploymentConfiguration implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+    }
+
+    private void setUpTables() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        UserFacade uf = new UserFacade();
+        User user = new User();
+        user.setUserName("user");
+        user.setPasswordHash(PasswordHash.createHash("test"));
+        user.addRole("User");
+        uf.addUser(user);
+        
+        AirlineFacade af = new AirlineFacade();
+        Airline a = new Airline();
+        a.setName("AngularJS Airline");
+        a.setUrl("http://angularairline-plaul.rhcloud.com");
+        af.addAirline(a);
+        
+        a = new Airline();
+        a.setName("TimeTravel");
+        a.setUrl("http://timetravel-tocvfan.rhcloud.com");
+        af.addAirline(a);
+        
+        a = new Airline();
+        a.setName("COS-Group2");
+        a.setUrl("http://wildfly-x.cloudapp.net/airline");
+        af.addAirline(a);
     }
 
 }

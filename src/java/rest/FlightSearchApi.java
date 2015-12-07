@@ -7,6 +7,7 @@ package rest;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import exceptions.NoFlightsFoundException;
 import java.util.List;
@@ -64,7 +65,10 @@ public class FlightSearchApi {
         
         JsonArray jsonFlights = new JsonArray();
         for (String flight : flightsByAirlines) {
-            jsonFlights.add(new JsonParser().parse(flight).getAsJsonObject());
+            JsonObject jsonFlight = new JsonParser().parse(flight).getAsJsonObject();
+            if (jsonFlight.get("airline") != null && jsonFlight.get("flights") != null) {
+                jsonFlights.add(jsonFlight);
+            }
         }
         
         return Response.status(Response.Status.OK).entity(jsonFlights.toString()).type(MediaType.APPLICATION_JSON).build();
