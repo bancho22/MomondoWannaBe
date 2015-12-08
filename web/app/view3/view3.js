@@ -23,6 +23,8 @@ angular.module('myApp.view3', ['ngRoute'])
                         contentType: "application/json", data: JSON.stringify($scope.user)}).
                             success(function (data, status, headers, config) {
                                  alert($scope.user.userName + " has sucessefully registered!");
+                                $scope.user = null;
+                              
                                 
 
                             }).
