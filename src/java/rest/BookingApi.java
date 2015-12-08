@@ -1,8 +1,11 @@
 package rest;
 
+import booking_engine.BookEngine;
 import com.google.gson.Gson;
 import entity.Booking;
+import exceptions.BookingError;
 import facades.BookingFacade;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import javax.annotation.security.RolesAllowed;
@@ -30,19 +33,23 @@ public class BookingApi {
         }
 
         BookingFacade bf = new BookingFacade();
+        BookEngine be = new BookEngine();
 
         @POST
         @Consumes("application/json")
         @Produces("application/json")
-        public String registerBooking(String json) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        public String registerBooking(String json) throws BookingError, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 
             Gson g = new Gson();
             entity.Booking b = g.fromJson(json, Booking.class);
+            boolean isValid = be.Book(b);
+            if (isValid) {
+                bf.addBooking(b);
+            } else {
+                throw new BookingError("Invalid booking");
+            }
 
-            
-            bf.addBooking(b);
             return g.toJson(b);
         }
     }
 }
-
