@@ -15,6 +15,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -38,18 +39,18 @@ public class BookingApi {
         @POST
         @Consumes("application/json")
         @Produces("application/json")
-        public String registerBooking(String json) throws BookingError, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        public Response registerBooking(String json) throws BookingError, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 
             Gson g = new Gson();
             entity.Booking b = g.fromJson(json, Booking.class);
-            boolean isValid = be.Book(b);
+            boolean isValid = be.book(b);
             if (isValid) {
                 bf.addBooking(b);
             } else {
                 throw new BookingError("Invalid booking");
             }
 
-            return g.toJson(b);
+            return Response.status(Response.Status.OK).entity(g.toString()).type(MediaType.APPLICATION_JSON).build();
         }
     }
 }
