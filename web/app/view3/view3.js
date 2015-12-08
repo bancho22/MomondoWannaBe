@@ -15,21 +15,28 @@ angular.module('myApp.view3', ['ngRoute'])
                 this.msgFromService = InfoService.getInfo();
 
 
-                
+
                 $scope.post = function () {
 
 
                     $http({method: 'POST', url: 'api/register',
                         contentType: "application/json", data: JSON.stringify($scope.user)}).
                             success(function (data, status, headers, config) {
+
                                  alert($scope.user.userName + " has sucessefully registered!");
                                 $scope.user = null;
                               
                                 
 
+
                             }).
                             error(function (data, status, headers, config) {
-                                    "Something weng wrong try again."
+//                                if (data.msg === undefined) {
+//                                    alert("Something weng wrong try again.");
+//                                }
+//                                alert(data.msg);
+                                alert("Something weng wrong try again.");
+                                $scope.user = {};
                             });
 
                 };

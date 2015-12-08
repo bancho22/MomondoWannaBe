@@ -6,10 +6,12 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -21,109 +23,89 @@ public class Booking implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String fName, lName, address, city, country, zip, origin, destination, time;
+    private String flightID, reserveeName, reservePhone, reserveEmail;
+    private int numberOfSeats;
+    private ArrayList<String> passengers;
+    @ManyToOne
+    private Airline airline;
 
     public Long getId() {
         return id;
     }
 
-    public Booking(Long id, String fName, String lName, String address, String city, String country, String zip, String origin, String destination, String time) {
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.address = address;
-        this.city = city;
-        this.country = country;
-        this.zip = zip;
-        this.origin = origin;
-        this.destination = destination;
-        this.time = time;
-    }
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public Booking() {
     }
+    
 
-    public void setId(Long id) {
-        this.id = id;
+    public Booking(String flightID, String ReserveeName, String ReservePhone, String ReserveEmail, int numberOfSeats, ArrayList<String> passengers) {
+        this.flightID = flightID;
+        this.reserveeName = ReserveeName;
+        this.reservePhone = ReservePhone;
+        this.reserveEmail = ReserveEmail;
+        this.numberOfSeats = numberOfSeats;
+        this.passengers = passengers;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
+
+    
+    public String getFlightID() {
+        return flightID;
+    }
+
+    public void setFlightID(String flightID) {
+        this.flightID = flightID;
+    }
+
+    public String getReserveeName() {
+        return reserveeName;
+    }
+
+    public void setReserveeName(String ReserveeName) {
+        this.reserveeName = ReserveeName;
+    }
+
+    public String getReservePhone() {
+        return reservePhone;
+    }
+
+    public void setReservePhone(String ReservePhone) {
+        this.reservePhone = ReservePhone;
+    }
+
+    public String getReserveEmail() {
+        return reserveEmail;
+    }
+
+    public void setReserveEmail(String ReserveEmail) {
+        this.reserveEmail = ReserveEmail;
+    }
+
+    public int getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
+
+    public ArrayList<String> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(ArrayList<String> passengers) {
+        this.passengers = passengers;
     }
 
     @Override
     public String toString() {
-        return "Booking{" + "id=" + id + ", fName=" + fName + ", lName=" + lName + ", address=" + address + ", city=" + city + ", country=" + country + ", zip=" + zip + ", origin=" + origin + ", destination=" + destination + ", time=" + time + '}';
+        return "Booking{" + "flightID=" + flightID + ", ReserveeName=" + reserveeName + ", ReservePhone=" + reservePhone + ", ReserveEmail=" + reserveEmail + ", numberOfSeats=" + numberOfSeats + ", passengers=" + passengers + '}';
     }
 
-  
-    
 }

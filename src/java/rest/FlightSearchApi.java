@@ -6,7 +6,7 @@
 package rest;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import exceptions.NoFlightsFoundException;
 import java.util.List;
@@ -38,13 +38,16 @@ public class FlightSearchApi {
         
         List<String> flightsByAirlines = searchEngine.findFlights(from, date, numTickets);
         
-        if(flightsByAirlines.isEmpty()){
-            throw new NoFlightsFoundException();
-        }
-        
         JsonArray jsonFlights = new JsonArray();
         for (String flight : flightsByAirlines) {
-            jsonFlights.add(new JsonParser().parse(flight).getAsJsonObject());
+            JsonObject jsonFlight = new JsonParser().parse(flight).getAsJsonObject();
+            if (jsonFlight.get("airline") != null && jsonFlight.get("flights") != null) {
+                jsonFlights.add(jsonFlight);
+            }
+        }
+        
+        if(jsonFlights.size() == 0){
+            throw new NoFlightsFoundException();
         }
         
         return Response.status(Response.Status.OK).entity(jsonFlights.toString()).type(MediaType.APPLICATION_JSON).build();
@@ -58,13 +61,16 @@ public class FlightSearchApi {
         
         List<String> flightsByAirlines = searchEngine.findFlights(from, to, date, numTickets);
 
-        if(flightsByAirlines.isEmpty()){
-            throw new NoFlightsFoundException();
-        }
-        
         JsonArray jsonFlights = new JsonArray();
         for (String flight : flightsByAirlines) {
-            jsonFlights.add(new JsonParser().parse(flight).getAsJsonObject());
+            JsonObject jsonFlight = new JsonParser().parse(flight).getAsJsonObject();
+            if (jsonFlight.get("airline") != null && jsonFlight.get("flights") != null) {
+                jsonFlights.add(jsonFlight);
+            }
+        }
+        
+        if(jsonFlights.size() == 0){
+            throw new NoFlightsFoundException();
         }
         
         return Response.status(Response.Status.OK).entity(jsonFlights.toString()).type(MediaType.APPLICATION_JSON).build();

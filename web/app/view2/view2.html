@@ -2,36 +2,41 @@
 
 
     <head>
-        <meta charset="utf-8">
-        <title>Booking</title>
+         <meta charset="utf-8">
+         <title>Booking</title>
 
     </head>
-    <body>
-        <div class="container">
-            
+     <body>
+         <div class="container">
+             
 
                 <h3>Booking</h3>
 
 
                 <div ng-controller="View2Ctrl">
+
                     <form role="form" ng-submit="book(user)"><pre>
         First Name: <input type="text" name="fName" ng-model="user.fName">
+
+                     <form role="form" ng-submit="book()"><pre>
+         First Name: <input type="text" name="fName" ng-model="user.fName">
+
 
         Last Name:  <input type="text" name="lName" ng-model="user.lName">
 
         Adress:     <input type="text" name="address" ng-model="user.address">
 
         City:       <input type="text" name="city" ng-model="user.city"> 
-   
-        ZIP:  <input type="text" name="zip" ng-model="user.zip">
+    
+         ZIP:  <input type="text" name="zip" ng-model="user.zip">
 
         Country:    <input type="text" name="country" ng-model="user.country">
 
 
                     <button type="submit" class="btn btn-success">Submit Order</button>  </pre>  
-                    </form>
-                </div>
-                
-                </div>
-                </body>
-                </html>
+                     </form>
+                 </div>
+                 
+                 </div>
+                 </body>
+                 </html>
