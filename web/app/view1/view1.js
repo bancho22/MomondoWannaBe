@@ -55,8 +55,11 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         }).
                                 error(function (data, status, headers, config) {
-                                    //alert(data.msg);
-                                    alert("No flights found");
+//                                    if (data.msg === undefined) {
+//                                        alert("No flights found.");
+//                                    }
+//                                    alert(data.msg);
+                                    alert("No flights found.");
                                     $scope.output = [];
                                 });
                     }
@@ -72,8 +75,11 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         }).
                                 error(function (data, status, headers, config) {
-                                    //alert(data.msg);
-                                    alert("No flights found");
+//                                    if (data.msg === undefined) {
+//                                        alert("No flights found.");
+//                                    }
+//                                    alert(data.msg);
+                                    alert("No flights found.");
                                     $scope.output = [];
                                 });
                     }
@@ -86,7 +92,4 @@ angular.module('myApp.view1', ['ngRoute'])
 
             }]
                 );
-
-
-
 

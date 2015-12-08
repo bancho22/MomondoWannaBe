@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import exceptions.UserAlreadyExistsException;
 import facades.UserFacade;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -25,10 +26,14 @@ public class RegisterApi {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public Response registerUser(String json) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Response registerUser(String json) throws NoSuchAlgorithmException, InvalidKeySpecException, UserAlreadyExistsException {
         JsonObject jsonObj = new JsonParser().parse(json).getAsJsonObject();
+        String userName = jsonObj.get("userName").getAsString();
+        if (uf.getUserByUserName(userName) != null) {
+            throw new UserAlreadyExistsException();
+        }
         entity.User u = new entity.User();
-        u.setUserName(jsonObj.get("userName").getAsString());
+        u.setUserName(userName);
         String password = jsonObj.get("password").getAsString();
         String hash = PasswordHash.createHash(password);
         u.setPasswordHash(hash);
