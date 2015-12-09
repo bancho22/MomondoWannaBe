@@ -35,7 +35,7 @@ angular.module('myApp.view2', ['ngRoute','myApp.view1','myApp.security'])
                     reserve.reserveEmail = booker.email;
                     reserve.numberOfSeats = parseInt(getNumOfSeats.numOfSeats);
                     reserve.flightID = getFlightID.flightID;
-                    reserve.airline = getAirline.airlineName;
+                    reserve.airlineName = getAirline.airlineName;
                     reserve.passengers = [];
                     
                     for(var i =0;i<$scope.passengers.length;i++){
