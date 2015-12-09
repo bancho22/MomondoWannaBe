@@ -14,18 +14,22 @@
 
 
                 <div ng-controller="View2Ctrl">
-                     <form role="form" ng-submit="book()"><pre>
-         First Name: <input type="text" name="fName" ng-model="user.fName">
 
-        Last Name:  <input type="text" name="lName" ng-model="user.lName">
+                    
 
-        Adress:     <input type="text" name="address" ng-model="user.address">
+                     <form role="form" ng-submit="book(booker)"><pre>
+         First Name: <input type="text" name="fName" ng-model="booker.fName">
 
-        City:       <input type="text" name="city" ng-model="user.city"> 
+
+        Last Name:  <input type="text" name="lName" ng-model="booker.lName">
+
+        Email:     <input type="text" name="address" ng-model="booker.email">
+
+       Phone:       <input type="text" name="city" ng-model="booker.phone"> 
     
-         ZIP:  <input type="text" name="zip" ng-model="user.zip">
+         
 
-        Country:    <input type="text" name="country" ng-model="user.country">
+        
 
 
                     <button type="submit" class="btn btn-success">Submit Order</button>  </pre>  

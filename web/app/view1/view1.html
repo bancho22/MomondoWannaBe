@@ -1,7 +1,7 @@
 <h3>Search for your dreamed flight</h3>
 
 
-<div  ng-controller="View1Ctrl">
+<div  ng-controller="View1Ctrl" >
     <form role="form" ng-submit="getFlight()">
         From:
         <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirportOrigin" required ><option></option></select>
@@ -15,8 +15,8 @@
         Seats: <select  name="tickets" ng-model="tickets" required>          
             <option value="" ></option>
             <option value="1" >1</option>
-            <option value="1" >2</option>
-            <option value="1" >3</option>
+            <option value="2" >2</option>
+            <option value="3" >3</option>
         </select>
         <br>
         <br>

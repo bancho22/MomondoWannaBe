@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.view2', ['ngRoute','myApp.view1'])
 
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/view2', {
@@ -9,23 +9,27 @@ angular.module('myApp.view2', ['ngRoute'])
             });
           }])
 
-        .controller('View2Ctrl', ["$scope", "$http",function ($http, $scope) { 
+        .controller('View2Ctrl', ["$scope","getNumOfSeats", "$http",function ($scope, getNumOfSeats,$http) { 
             
             
-          var book = function(){
+          $scope.book = function(booker){
               alert("inside");
-             var user = {};
-
-                    $http({method: 'POST', url: 'api/booking',
-                        contentType: "application/json", data: JSON.stringify($scope.user)}).
-                            success(function (data, status, headers, config) {
-                                 alert($scope.user.userName + " booked");
-                                
-
-                            }).
-                            error(function (data, status, headers, config) {
-                                    "Something weng wrong try again."
-                            });
+                    alert(getNumOfSeats);
+//                    var reserve = {};
+//                    reserve.Name = booker.fName + " " + booker.lName;
+//                    reserve.Phone = booker.phone;
+//                    reserve.Email = booker.email;
+//                    reserve.seats = getNumOfSeats;
+//                    $http({method: 'POST', url: 'api/booking',
+//                        contentType: "application/json", data: JSON.stringify(booker)}).
+//                            success(function (data, status, headers, config) {
+//                                 alert(user.fName + " booked");
+//                                
+//
+//                            }).
+//                            error(function (data, status, headers, config) {
+//                                    "Something weng wrong try again."
+//                            });
  
           }
 

@@ -22,9 +22,12 @@ angular.module('myApp.view3', ['ngRoute'])
                     $http({method: 'POST', url: 'api/register',
                         contentType: "application/json", data: JSON.stringify($scope.user)}).
                             success(function (data, status, headers, config) {
-                                //alert($scope.user.userName + " has sucessefully registered!");
-                                alert(data.userName + " has sucessefully registered!");
-                                $scope.user = {};
+
+                                 alert($scope.user.userName + " has sucessefully registered!");
+                                $scope.user = null;
+                              
+                                
+
 
                             }).
                             error(function (data, status, headers, config) {

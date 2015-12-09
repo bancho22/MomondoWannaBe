@@ -12,18 +12,18 @@
         <div class="container">
             <div id="login-form">
 
-    <h3>Login</h3>
+    <h3>Register</h3>
 
     <fieldset>
                 <div ng-controller="View3Ctrl">
                      <form  role="form" ng-submit="post()"  >
                         <div class="form-group">
-                            <input type="text" style="width:10em;" placeholder="User name" class="form-control"
-                                   ng-model="user.userName">
+                            <input type="text" id="usern" style="width:10em;" placeholder="User name" class="form-control"
+                                   ng-model="user.userName" required="" onforminput="setCustomValidity(value != usern.value ? 'Passwords do not match.' : '')">
                         </div>
                         <div class="form-group">
-                            <input type="password" style="width:10em;" placeholder="Password" class="form-control"
-                                   ng-model="user.password">
+                            <input type="password" id="userp" style="width:10em;" placeholder="Password" class="form-control"
+                                   ng-model="user.password" required="">
                         </div>
                         <button type="submit" class="btn btn-success">Sign up</button>
 
