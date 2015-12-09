@@ -27,7 +27,13 @@
 
        Phone:       <input type="text" name="city" ng-model="booker.phone"> 
     
-         
+         <div ng-repeat="passenger in passengers">
+             Passanger:{{passenger +1}}
+             
+             Full Name: <input type="text" ng-model="booker.passengers[passenger].Name">
+             
+             
+             </div>
 
         
 
