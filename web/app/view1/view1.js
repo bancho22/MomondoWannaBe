@@ -8,9 +8,15 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
 
-
-        .controller('View1Ctrl', ["$scope", "$http", function ($scope, $http) {
-
+.service('getNumOfSeats', [function(numberOfSeats){
+        //trqq da zema ot scopa number of seatsa
+       return  numberOfSeats;
+          
+          
+          
+  }])
+        .controller('View1Ctrl', ["getNumOfSeats","$scope", "$http", function (getNumOfSeats,$scope, $http) {
+                getNumOfSeats($scope.flight.numberOfSeats);
                 $scope.airport = [{
                         id: 1,
                         label: 'Copenhagen',
