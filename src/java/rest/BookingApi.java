@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Airline;
 import entity.Booking;
-import exceptions.BookingError;
+import exceptions.BookingException;
 import facades.AirlineFacade;
 import facades.BookingFacade;
 import facades.UserFacade;
@@ -46,7 +46,7 @@ public class BookingApi {
         @POST
         @Consumes("application/json")
         @Produces("application/json")
-        public Response registerBooking(String json) throws BookingError, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        public Response registerBooking(String json) throws BookingException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
             JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
             entity.User reservee = uf.getUserByUserName(obj.get("username").getAsString());
             Airline airline = af.getAirlineByName(obj.get("airlineName").getAsString());
@@ -54,13 +54,14 @@ public class BookingApi {
             entity.Booking b = g.fromJson(json, Booking.class);
             b.setReservee(reservee);
             b.setAirline(airline);
-            boolean isValid = be.book(b);
-            if (isValid) {
+            
+            JsonObject response = be.book(b);
+            if (response.get("code").getAsInt() == 200) {
                 bf.addBooking(b);
             } else {
-                throw new BookingError("Invalid booking");
+                throw new BookingException(response.toString());
             }
 
-            return Response.status(Response.Status.OK).entity(g.toString()).type(MediaType.APPLICATION_JSON).build();
+            return Response.status(Response.Status.OK).entity(response.toString()).type(MediaType.APPLICATION_JSON).build();
         }
 }

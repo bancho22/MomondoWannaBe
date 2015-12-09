@@ -7,6 +7,8 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +27,8 @@ public class Booking implements Serializable {
     private Long id;
     private String flightID, reserveeName, reservePhone, reserveEmail;
     private int numberOfSeats;
-    private ArrayList<String> passengers;
+    @ElementCollection()
+    private List<String> passengers;
     @ManyToOne
     private Airline airline;
     @ManyToOne
@@ -106,7 +109,7 @@ public class Booking implements Serializable {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public ArrayList<String> getPassengers() {
+    public List<String> getPassengers() {
         return passengers;
     }
 

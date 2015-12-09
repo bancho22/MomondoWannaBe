@@ -2,6 +2,8 @@ package booking_engine;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import entity.Booking;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,9 +15,7 @@ import java.util.Scanner;
 
 public class BookEngine {
 
-    private boolean valid;
-
-    public boolean book(Booking b) throws IOException {
+    public JsonObject book(Booking b) throws IOException {
         JsonObject json = new JsonObject();
 
         json.addProperty("flightID", b.getFlightID());
@@ -27,13 +27,13 @@ public class BookEngine {
         JsonArray jArray = new JsonArray();
         for (int i = 0; i < b.getPassengers().size(); i++) {
             JsonObject passenger = new JsonObject();
-            String[] split = b.getPassengers().get(i).split("_");
+            String[] split = b.getPassengers().get(i).split(" ");
             passenger.addProperty("firstName", split[0]);
             passenger.addProperty("lastName", split[1]);
             jArray.add(passenger);
 
         }
-        json.add("Passsengers", jArray);
+        json.add("Passengers", jArray);
 
         String url = b.getAirline().getUrl() + "/api/flightreservation";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
@@ -56,6 +56,15 @@ public class BookEngine {
         System.out.println(response);
         System.out.println(con.getResponseCode());
         System.out.println(con.getResponseMessage());
-        return valid = (con.getResponseCode() == 200);
+        JsonObject responseObj;
+        try{
+            responseObj = new JsonParser().parse(response).getAsJsonObject();
+        }catch(JsonSyntaxException e){
+            responseObj = new JsonObject();
+            responseObj.addProperty("errorCode", 42);
+            responseObj.addProperty("msg", "Something went wrong");
+        }
+        responseObj.addProperty("code", con.getResponseCode());
+        return responseObj;
     }
 }

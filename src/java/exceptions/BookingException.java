@@ -9,9 +9,9 @@ package exceptions;
  *
  * @author Mato
  */
-public class BookingError extends Exception{
+public class BookingException extends Exception{
 
-    public BookingError(String message) {
+    public BookingException(String message) {
         super(message);
     }
     
