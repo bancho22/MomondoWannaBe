@@ -53,4 +53,17 @@ public class AirlineFacade {
         }
         return airline;
     }
+    
+    public Airline getAirlineByName(String airlineName){
+        EntityManager em = getEntityManager();
+        Airline airline = null;
+        try{
+            Query query = em.createQuery("SELECT a FROM Airline a WHERE a.name = :name");
+            query.setParameter("name", airlineName);
+            airline = (Airline) query.getSingleResult();
+        }finally{
+            em.close();
+        }
+        return airline;
+    }
 }

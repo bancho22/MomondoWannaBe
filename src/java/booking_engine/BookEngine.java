@@ -12,29 +12,29 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class BookEngine {
-    
+
     private boolean valid;
-    
-    public boolean book(Booking b) throws IOException{
+
+    public boolean book(Booking b) throws IOException {
         JsonObject json = new JsonObject();
-        
+
         json.addProperty("flightID", b.getFlightID());
         json.addProperty("numberOfSeats", b.getNumberOfSeats());
         json.addProperty("ReserveeName", b.getReserveeName());
         json.addProperty("ReservePhone", b.getReservePhone());
         json.addProperty("ReserveEmail", b.getReserveEmail());
-        
+
         JsonArray jArray = new JsonArray();
-        for(int i=0; i<b.getPassengers().size(); i++) {
+        for (int i = 0; i < b.getPassengers().size(); i++) {
             JsonObject passenger = new JsonObject();
             String[] split = b.getPassengers().get(i).split("_");
             passenger.addProperty("firstName", split[0]);
             passenger.addProperty("lastName", split[1]);
-                    jArray.add(passenger);
+            jArray.add(passenger);
 
         }
         json.add("Passsengers", jArray);
-        
+
         String url = b.getAirline().getUrl() + "/api/flightreservation";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
         con.setRequestProperty("Content-Type", "application/json;");
@@ -56,6 +56,6 @@ public class BookEngine {
         System.out.println(response);
         System.out.println(con.getResponseCode());
         System.out.println(con.getResponseMessage());
-        return valid = (con.getResponseCode()==200);
+        return valid = (con.getResponseCode() == 200);
     }
 }

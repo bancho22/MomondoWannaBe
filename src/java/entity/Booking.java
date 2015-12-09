@@ -28,6 +28,8 @@ public class Booking implements Serializable {
     private ArrayList<String> passengers;
     @ManyToOne
     private Airline airline;
+    @ManyToOne
+    private User reservee;
 
     public Long getId() {
         return id;
@@ -45,6 +47,15 @@ public class Booking implements Serializable {
         this.numberOfSeats = numberOfSeats;
         this.passengers = passengers;
     }
+
+    public User getReservee() {
+        return reservee;
+    }
+
+    public void setReservee(User reservee) {
+        this.reservee = reservee;
+    }
+
 
     public Airline getAirline() {
         return airline;
