@@ -1,5 +1,5 @@
 angular.module('myApp.security', [])
-.controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location) {
+.controller('AppLoginCtrl',  function(getuserName,$scope, $rootScope, $http, $window, $location) {
 
   function url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
@@ -27,6 +27,7 @@ angular.module('myApp.security', [])
   $scope.isActive = function (viewLocation) {
     return viewLocation === $location.path();
   };
+  
 
 
   $scope.username = "";
@@ -45,6 +46,8 @@ angular.module('myApp.security', [])
               var encodedProfile = data.token.split('.')[1];
               var profile = JSON.parse(url_base64_decode(encodedProfile));
               $scope.username = profile.username;
+              getuserName.username = $scope.username;
+              
               var roles = profile.roles.split(",");
               roles.forEach(function (role) {
                 if(role === "Admin"){
@@ -92,8 +95,16 @@ angular.module('myApp.security', [])
   };
 // and fire it after definition
   init();
-}).
-  factory('authInterceptor', function ($rootScope, $q, $window) {
+})
+.service('getuserName', [function(){
+        var username = {};
+        
+       return  username;
+          
+          
+          
+  }])
+        .  factory('authInterceptor', function ($rootScope, $q, $window) {
     return {
       request: function (config) {
         config.headers = config.headers || {};

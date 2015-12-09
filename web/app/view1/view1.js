@@ -8,15 +8,33 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
 
-.service('getNumOfSeats', [function(numberOfSeats){
-        //trqq da zema ot scopa number of seatsa
-       return  numberOfSeats;
+.service('getNumOfSeats', [function(){
+        var numOfSeats = {};
+        
+       return  numOfSeats;
           
           
           
   }])
-        .controller('View1Ctrl', ["getNumOfSeats","$scope", "$http", function (getNumOfSeats,$scope, $http) {
-                getNumOfSeats($scope.flight.numberOfSeats);
+  .service('getFlightID', [function(){
+        var flightID = {};
+        
+       return  flightID;
+          
+          
+          
+  }])
+   .service('getAirline', [function(){
+        var airlineName = {};
+        
+       return  airlineName;
+          
+          
+          
+  }])
+  
+        .controller('View1Ctrl', ["getNumOfSeats","getAirline","getFlightID","$scope", "$http", function (getNumOfSeats,getAirline,getFlightID,$scope, $http) {
+                    
                 $scope.airport = [{
                         id: 1,
                         label: 'Copenhagen',
@@ -44,9 +62,10 @@ angular.module('myApp.view1', ['ngRoute'])
                     }
 
                 ];
+                
 
 
-                $scope.getFlight = function () {
+                $scope.getFlight = function (flightNumber,airline) {
                     if ($scope.chosenAirportDestination === undefined) {
                         return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
                             contentType: "application/json"}).success(function (data) {
@@ -54,7 +73,10 @@ angular.module('myApp.view1', ['ngRoute'])
 
 
                             $scope.output = data;
-
+                            getNumOfSeats.numOfSeats = 0;
+                           
+                        getNumOfSeats.numOfSeats = $scope.tickets;
+                            
 
 
 
@@ -74,9 +96,13 @@ angular.module('myApp.view1', ['ngRoute'])
                             contentType: "application/json"}).success(function (data) {
 
 
-
+                            
                             $scope.output = data;
-
+                            getNumOfSeats.numOfSeats = 0;
+                           getFlightID.flightID = flightNumber;
+                        getNumOfSeats.numOfSeats = $scope.tickets;
+                        getAirline.airlineName = airline;
+                        alert(getNumOfSeats.numOfSeats);
 
 
                         }).
