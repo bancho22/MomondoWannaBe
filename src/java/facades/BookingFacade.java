@@ -56,6 +56,22 @@ public class BookingFacade {
         return listOfBooks;
     }
     
+    public List<Booking> getBookings(){
+        EntityManager em = getEntityManager();
+        Booking booking = null;
+        List<Booking> listOfBooks = null;
+        try{
+            Query query = em.createQuery("SELECT * FROM Booking");
+            
+            listOfBooks = query.getResultList();
+        }catch(NoResultException ex){
+            //return null
+        }finally{
+            em.close();
+        }
+        return listOfBooks;
+    }
+    
     
     
    

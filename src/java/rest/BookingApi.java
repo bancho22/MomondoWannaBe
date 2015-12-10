@@ -60,6 +60,27 @@ public class BookingApi {
             
 //            return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
         }
+        @GET
+        @Path("getBookings")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getAllBookings() {
+          //JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
+            
+          
+            
+          List<Booking> books =bf.getBookings();
+          Gson g = new Gson();
+                JsonArray jsonArray = new JsonArray();
+            for (entity.Booking b : books) {
+                jsonArray.add(new JsonParser().parse(g.toJson(b)));
+                
+            }
+              
+                                
+            return Response.status(Response.Status.OK).entity(jsonArray.toString()).type(MediaType.APPLICATION_JSON).build();
+            
+//            return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
+        }
         @POST
         @Consumes("application/json")
         @Produces("application/json")
