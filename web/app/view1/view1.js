@@ -67,7 +67,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 $scope.getFlight = function (flightNumber,airline) {
                     if ($scope.chosenAirportDestination === undefined) {
-                        return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
+                        return $http({method: 'GET', url: 'api/flightinfo/' + $scope.chosenAirportOrigin.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
                             contentType: "application/json"}).success(function (data) {
 
 
@@ -92,7 +92,7 @@ angular.module('myApp.view1', ['ngRoute'])
                                 });
                     }
                     else {
-                        return $http({method: 'GET', url: '/3rdSemesterProject/api/flightinfo/' + $scope.chosenAirportOrigin.name + "/" + $scope.chosenAirportDestination.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
+                        return $http({method: 'GET', url: 'api/flightinfo/' + $scope.chosenAirportOrigin.name + "/" + $scope.chosenAirportDestination.name + '/' + $scope.date.toISOString() + '/' + $scope.tickets,
                             contentType: "application/json"}).success(function (data) {
 
 

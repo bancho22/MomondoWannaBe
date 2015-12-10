@@ -46,6 +46,13 @@ public class DeploymentConfiguration implements ServletContextListener {
         user.addRole("User");
         uf.addUser(user);
         
+        User admin = new User();
+        admin.setUserName("admin");
+        admin.setPasswordHash(PasswordHash.createHash("test"));
+        admin.addRole("User");
+        admin.addRole("Admin");
+        uf.addUser(admin);
+        
         AirlineFacade af = new AirlineFacade();
         Airline a = new Airline();
         a.setName("AngularJS Airline");
