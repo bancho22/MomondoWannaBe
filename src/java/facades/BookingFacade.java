@@ -2,6 +2,8 @@ package facades;
 
 import deploy.DeploymentConfiguration;
 import entity.Booking;
+import entity.User;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -38,19 +40,20 @@ public class BookingFacade {
     }
     
    
-    public Booking getBookingByUser(String lName){
+    public List<Booking> getBookingByUser(User user){
         EntityManager em = getEntityManager();
         Booking booking = null;
+        List<Booking> listOfBooks = null;
         try{
-            Query query = em.createQuery("SELECT b FROM Booking b WHERE b.lName = :lName");
-            query.setParameter("lName", lName);
-            booking = (Booking) query.getSingleResult();
+            Query query = em.createQuery("SELECT b FROM Booking b WHERE b.reservee = :user");
+            query.setParameter("user", user);
+            listOfBooks = query.getResultList();
         }catch(NoResultException ex){
             //return null
         }finally{
             em.close();
         }
-        return booking;
+        return listOfBooks;
     }
     
     

@@ -2,6 +2,7 @@ package rest;
 
 import booking_engine.BookEngine;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Airline;
@@ -13,11 +14,13 @@ import facades.UserFacade;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,17 +35,31 @@ public class BookingApi {
 
     
 
-        @GET
-        @Produces(MediaType.APPLICATION_JSON)
-        public String getSomething() {
-            return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
-        }
 
         BookingFacade bf = new BookingFacade();
         AirlineFacade af = new AirlineFacade();
         UserFacade uf = new UserFacade();
         BookEngine be = new BookEngine();
 
+        @GET
+        @Path("getBookings/{username}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getBookingsForUser(@PathParam("username") String username) {
+          //JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
+          entity.User reservee = uf.getUserByUserName(username);
+          List<Booking> books =bf.getBookingByUser(reservee);
+          Gson g = new Gson();
+                JsonArray jsonArray = new JsonArray();
+            for (entity.Booking b : books) {
+                jsonArray.add(new JsonParser().parse(g.toJson(b)));
+                
+            }
+              
+                                
+            return Response.status(Response.Status.OK).entity(jsonArray.toString()).type(MediaType.APPLICATION_JSON).build();
+            
+//            return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
+        }
         @POST
         @Consumes("application/json")
         @Produces("application/json")
