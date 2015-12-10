@@ -1,0 +1,25 @@
+<h3>Your reservations   </h3>
+
+
+<div  ng-controller="View4Ctrl" >
+
+    <br>
+
+    <uib-accordion>
+        <div ng-repeat="reservations in output">
+            <uib-accordion-group heading="{{flight.origin}} -> {{flight.destination}}" ng-repeat="flight in airline.flights">
+
+
+
+                <ul>
+
+                    <li><b>Airline: </b> {{airline.airline}} </li>
+                    <li><b>Flight number: </b> {{flight.flightID}} </li>
+                    <li ng-model="price"><b>Price: </b> {{flight.totalPrice}} EUR</li>
+
+                    <a href="#view2"><button ng-click="getFlight(flight.flightID, airline.airline)" type="submit" class="btn btn-success">Book</button>
+                </ul>
+        </div>
+        </uib-accordion-group>
+    </uib-accordion>
+</div>
