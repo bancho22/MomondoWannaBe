@@ -49,7 +49,8 @@ angular.module('myApp.view2', ['ngRoute','myApp.view1','myApp.security'])
                     $http({method: 'POST', url: 'api/booking',
                         contentType: "application/json", data: JSON.stringify(reserve)}).
                             success(function (data, status, headers, config) {
-                                 alert(user.fName + " booked");
+                                 alert(reserve.reserveeName + ": you have booked a flight");
+                                 
                                 
 
                             }).

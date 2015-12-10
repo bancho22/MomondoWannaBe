@@ -61,13 +61,7 @@ angular.module('myApp.view5', ['ngRoute','myApp.security'])
 
 
                         $scope.output = data;
-                        getOrigin.origin = origin;
-                        getDestination.destination = destination;
-                        getFlightID.flightID = flightNumber;
-                        getAirline.airlineName = airline;
-                        getFname.fname = fname;
-                        getLname.lname = lname;
-                        getPrice.price = price;
+                        
                     }).
                             error(function (data, status, headers, config) {
 
