@@ -1,4 +1,4 @@
-angular.module('myApp.view5', ['ngRoute'])
+angular.module('myApp.view5', ['ngRoute','myApp.security'])
 
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/view5', {
@@ -48,29 +48,14 @@ angular.module('myApp.view5', ['ngRoute'])
 
 
             }])
-        .service('getLname', [function () {
-                var lname = {};
+        
 
-                return  lname;
-
-
-
-            }])
-        .service('getFname', [function () {
-                var fname = {};
-
-                return  fname;
-
-
-
-            }])
-
-        .controller('View5Ctrl', ["username", function ($scope, $http) {
+        .controller('View5Ctrl', ["getuserName","$scope","$http", function (getuserName,$scope, $http) {
 
 
 
                 $scope.getReservations = function () {
-                    return $http({method: 'GET', url: '/3rdSemesterProject/api/booking/getBookings/' + $scope.username,
+                    return $http({method: 'GET', url: '/3rdSemesterProject/api/booking/getBookings/' + getuserName.username,
                         contentType: "application/json"}).success(function (data) {
 
 
