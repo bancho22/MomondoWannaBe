@@ -3,11 +3,11 @@
 
 <div  ng-controller="View1Ctrl" >
     <form role="form" ng-submit="getFlight()">
-        From:
-        <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirportOrigin" required ><option></option></select>
+       
+         From:<select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirportOrigin" required ><option></option></select>
         <br><br>
-        *To: 
-        <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirportDestination" ></select>
+         
+        *To:  <select ng-options="apt as apt.label for apt in airport track by apt.id"  ng-model="chosenAirportDestination" ></select>
         <br><br>
 
         Departure date:

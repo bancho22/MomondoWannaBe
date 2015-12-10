@@ -1,0 +1,32 @@
+<h3>Reservations</h3>
+
+
+<div  ng-controller="View5Ctrl" >
+
+    <br>
+
+    
+    <table ng-repeat="reservations in output" style="width:100%">
+  <tr>
+    <th>Origin</th>
+    <th>Destination</th> 
+    <th>Flight ID</th> 
+    <th>Airline</th> 
+    <th>Price</th>
+    <th>Name</th>
+    <th>Surname</th>
+    </tr>
+  <tr>
+    <td>{{reservations.origin}}</td>
+    <td>{{reservations.destination}}</td>
+    <td>{{reservations.flightId}}</td>
+    <td>{{reservations.airline}}</td>
+    <td>{{reservations.totalPrice}}</td>
+    <td>{{reservations.fname}}</td>
+    <td>{{reservations.lname}}</td>
+  </tr>
+</table>
+    
+    
+   
+</div>
