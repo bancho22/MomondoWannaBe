@@ -49,22 +49,18 @@ angular.module('myApp.view4', ['ngRoute'])
 
             }])
 
-        .controller('View4Ctrl', ["username", function (username, $scope, $http) {
+        .controller('View4Ctrl', ["$scope","$http", function ( $scope, $http) {
 
 
 
-                $scope.getReservations = function (username) {
-                    return $http({method: 'GET', url: '/3rdSemesterProject/api/booking/' + $scope.username,
+                $scope.getReservations = function () {
+                    return $http({method: 'GET', url: '/3rdSemesterProject/api/booking/getBookings',
                         contentType: "application/json"}).success(function (data) {
 
 
 
                         $scope.output = data;
-                        getOrigin.origin = origin;
-                        getDestination.destination = destination;
-                        getFlightID.flightID = flightNumber;
-                        getAirline.airlineName = airline;
-                        getPrice.price = price;
+                        
                     }).
                             error(function (data, status, headers, config) {
 
