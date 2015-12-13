@@ -102,7 +102,6 @@ angular.module('myApp.view1', ['ngRoute'])
                            getFlightID.flightID = flightNumber;
                         getNumOfSeats.numOfSeats = $scope.tickets;
                         getAirline.airlineName = airline;
-                        alert(getNumOfSeats.numOfSeats);
 
 
                         }).

@@ -29,7 +29,9 @@ public class BookEngine {
             JsonObject passenger = new JsonObject();
             String[] split = b.getPassengers().get(i).split(" ");
             passenger.addProperty("firstName", split[0]);
-            passenger.addProperty("lastName", split[1]);
+            if (split.length > 1) {
+                passenger.addProperty("lastName", split[1]);
+            }
             jArray.add(passenger);
 
         }

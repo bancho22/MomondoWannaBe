@@ -18,18 +18,18 @@
 
 
                 <form role="form" ng-submit="book(booker)"><pre>
-        First Name: <input type="text" name="fName" ng-model="booker.fName">
+        First Name: <input type="text" name="fName" ng-model="booker.fName" required>
 
-        Last Name:  <input type="text" name="lName" ng-model="booker.lName">
+        Last Name:  <input type="text" name="lName" ng-model="booker.lName" required>
 
-        Email:      <input type="text" name="address" ng-model="booker.email">
+        Email:      <input type="text" name="address" ng-model="booker.email" required>
 
-        Phone:      <input type="text" name="city" ng-model="booker.phone"> 
+        Phone:      <input type="text" name="city" ng-model="booker.phone" required> 
     
          <div ng-repeat="passenger in passengers">
              Passenger:{{passenger + 1}}
              
-             Full Name: <input type="text" ng-model="booker.passengers[passenger].Name">
+             Full Name: <input type="text" ng-model="booker.passengers[passenger].Name" required>
              
              
              </div>
