@@ -54,7 +54,7 @@ angular.module('myApp.view4', ['ngRoute'])
 
 
                 $scope.getReservations = function () {
-                    return $http({method: 'GET', url: '/3rdSemesterProject/api/booking/getBookings',
+                    return $http({method: 'GET', url: '/api/booking/getBookings',
                         contentType: "application/json"}).success(function (data) {
 
 

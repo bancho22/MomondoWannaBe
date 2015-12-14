@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,23 +27,29 @@ public class TicketRequest implements Serializable {
     
     private String from;
     private String to;
-    private Date date;
+    
+    @Temporal(TemporalType.DATE)
+    private Date flightDate;
+    
+    @Temporal(TemporalType.DATE)
+    private Date searchDate;
 
     public TicketRequest() {
     }
 
-    public TicketRequest(String from, Date date) {
+    public TicketRequest(String from, Date flightDate, Date searchDate) {
         this.from = from;
-        this.date = date;
+        this.flightDate = flightDate;
+        this.searchDate = searchDate;
     }
 
-    public TicketRequest(String from, String to, Date date) {
+    public TicketRequest(String from, String to, Date flightDate, Date searchDate) {
         this.from = from;
         this.to = to;
-        this.date = date;
+        this.flightDate = flightDate;
+        this.searchDate = searchDate;
     }
-    
-    
+
 
     public Integer getId() {
         return id;
@@ -67,14 +75,20 @@ public class TicketRequest implements Serializable {
         this.to = to;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getFlightDate() {
+        return flightDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setFlightDate(Date date) {
+        this.flightDate = date;
     }
 
-    
-    
+    public Date getSearchDate() {
+        return searchDate;
+    }
+
+    public void setSearchDate(Date searchDate) {
+        this.searchDate = searchDate;
+    }
+
 }

@@ -14,6 +14,7 @@ import facades.TicketRequestFacade;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +48,7 @@ public class FlightSearchApi {
         
         DateFormat sdfISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         try {
-            trf.addTicketRequest(new TicketRequest(from, sdfISO.parse(date)));
+            trf.addTicketRequest(new TicketRequest(from, sdfISO.parse(date), new Date()));
         } catch (ParseException ex) {
             Logger.getLogger(FlightSearchApi.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,7 +78,7 @@ public class FlightSearchApi {
         
         DateFormat sdfISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         try {
-            trf.addTicketRequest(new TicketRequest(from, to, sdfISO.parse(date)));
+            trf.addTicketRequest(new TicketRequest(from, to, sdfISO.parse(date), new Date()));
         } catch (ParseException ex) {
             Logger.getLogger(FlightSearchApi.class.getName()).log(Level.SEVERE, null, ex);
         }
