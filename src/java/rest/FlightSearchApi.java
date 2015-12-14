@@ -8,8 +8,15 @@ package rest;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import entity.TicketRequest;
 import exceptions.NoFlightsFoundException;
+import facades.TicketRequestFacade;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,15 +33,24 @@ import search_engine.SearchEngine;
 public class FlightSearchApi {
     
     private SearchEngine searchEngine;
-        
+    private TicketRequestFacade trf;
+
     public FlightSearchApi(){
         searchEngine = new SearchEngine();
+        trf = new TicketRequestFacade();
     }
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{from}/{date}/{numTickets}")
     public Response getFlightResults(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numTickets") String numTickets) throws NoFlightsFoundException{
+        
+        DateFormat sdfISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        try {
+            trf.addTicketRequest(new TicketRequest(from, sdfISO.parse(date)));
+        } catch (ParseException ex) {
+            Logger.getLogger(FlightSearchApi.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         List<String> flightsByAirlines = searchEngine.findFlights(from, date, numTickets);
         
@@ -58,6 +74,13 @@ public class FlightSearchApi {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{from}/{to}/{date}/{numTickets}")
     public Response getFlightResults2(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date, @PathParam("numTickets") String numTickets) throws NoFlightsFoundException{
+        
+        DateFormat sdfISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        try {
+            trf.addTicketRequest(new TicketRequest(from, to, sdfISO.parse(date)));
+        } catch (ParseException ex) {
+            Logger.getLogger(FlightSearchApi.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         List<String> flightsByAirlines = searchEngine.findFlights(from, to, date, numTickets);
 
