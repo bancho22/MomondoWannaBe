@@ -65,7 +65,7 @@ angular.module('myApp.view5', ['ngRoute','myApp.security'])
                     }).
                             error(function (data, status, headers, config) {
 
-                                alert("No data found.");
+                                
                                 $scope.output = [];
                             });
 

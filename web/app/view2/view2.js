@@ -38,7 +38,7 @@ angular.module('myApp.view2', ['ngRoute','myApp.view1','myApp.security'])
                     reserve.airlineName = getAirline.airlineName;
                     reserve.passengers = [];
                     
-                    for(var i =0;i<$scope.passengers.length;i++){
+                    for(var i =1;i<$scope.passengers.length;i++){
                           var fullName = booker.passengers[i].Name;
                           reserve.passengers.push(fullName);
                     }
