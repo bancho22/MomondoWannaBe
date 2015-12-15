@@ -4,25 +4,28 @@
 <div  ng-controller="View4Ctrl" >
 
     <br>
+    <button ng-click="getReservations()" class="btn btn-success">Get your reservations</button>
+    
+    <table ng-repeat="reservations in output" border="1"  >
+        <thead >
+            <tr>
 
-    <uib-accordion>
-        <div ng-repeat="reservations in output">
-            <uib-accordion-group heading="{{reservations.reserveeName}} -> {{reservations.reservePhone}}" ng-repeat="flight in airline.flights">
+                <th>Flight ID</th> 
+                <th>Airline Name</th> 
+                <th>Price</th>
+                <th>Name</th>
+                <th>Surname</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
 
-
-
-                <ul>
-
-                    <li><b>Username: </b> {{airline.airline}} </li>
-                    <li><b>Passangers: </b> {{flight.flightID}} </li>
-                    <li><b>Airline: </b> {{flight.totalPrice}} </li>
-                    <li><b>Phone: </b> {{flight.totalPrice}} </li>
-                    <li><b>Email: </b> {{flight.totalPrice}} </li>
-                    <li><b>Flights: </b> {{flight.totalPrice}} </li>
-
-                    
-                </ul>
-        </div>
-        </uib-accordion-group>
-    </uib-accordion>
+                <td>{{reservations.flightID}}</td>
+                <td>{{reservations.airline.name}}</td>
+                <td style="width:100%">{{reservations.reserveEmail}}</td>
+                <td style="width:100%">{{reservations.reservePhone}}</td>
+                <td style="width:100%">{{reservations.reserveeName}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

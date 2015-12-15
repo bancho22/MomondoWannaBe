@@ -1,4 +1,4 @@
-angular.module('myApp.view4', ['ngRoute'])
+angular.module('myApp.view4', ['ngRoute','myApp.security'])
 
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/view4', {
@@ -49,12 +49,12 @@ angular.module('myApp.view4', ['ngRoute'])
 
             }])
 
-        .controller('View4Ctrl', ["$scope","$http", function ( $scope, $http) {
+        .controller('View4Ctrl', ["getuserName","$scope","$http", function (getuserName, $scope, $http) {
 
 
 
                 $scope.getReservations = function () {
-                    return $http({method: 'GET', url: '/api/booking/getBookings',
+                    return $http({method: 'GET', url: '/api/booking/getBookings/'+ getuserName.username,
                         contentType: "application/json"}).success(function (data) {
 
 
