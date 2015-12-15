@@ -61,6 +61,7 @@ public class BookingApi {
         }
         @GET
         @Path("getBookings")
+        @RolesAllowed("Admin")
         @Produces(MediaType.APPLICATION_JSON)
         public Response getAllBookings() {
           //JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
