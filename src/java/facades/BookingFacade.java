@@ -61,7 +61,7 @@ public class BookingFacade {
         Booking booking = null;
         List<Booking> listOfBooks = null;
         try{
-            Query query = em.createQuery("SELECT * FROM Booking");
+            Query query = em.createQuery("SELECT b FROM Booking b");
             
             listOfBooks = query.getResultList();
         }catch(NoResultException ex){

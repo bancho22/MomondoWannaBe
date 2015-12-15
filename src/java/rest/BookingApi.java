@@ -30,7 +30,6 @@ import javax.ws.rs.core.Response;
  * @author Mato
  */
 @Path("booking")
-@RolesAllowed("User")
 public class BookingApi {
 
     
