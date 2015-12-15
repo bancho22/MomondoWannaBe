@@ -54,7 +54,7 @@ angular.module('myApp.view4', ['ngRoute','myApp.security'])
 
 
                 $scope.getReservations = function () {
-                    return $http({method: 'GET', url: '/api/booking/getBookings/'+ getuserName.username,
+                    return $http({method: 'GET', url: 'api/booking/getBookings/'+ getuserName.username,
                         contentType: "application/json"}).success(function (data) {
 
 
