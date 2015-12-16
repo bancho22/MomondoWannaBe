@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import java.util.Scanner;
 
@@ -27,15 +26,25 @@ public class BookEngine {
         json.addProperty("ReserveEmail", b.getReserveEmail());
 
         JsonArray jArray = new JsonArray();
-        for (int i = 0; i < b.getPassengers().size(); i++) {
+        if (b.getPassengers().isEmpty()) {
             JsonObject passenger = new JsonObject();
-            String[] split = b.getPassengers().get(i).split(" ");
-            passenger.addProperty("firstName", split[0]);
-            if (split.length > 1) {
-                passenger.addProperty("lastName", split[1]);
+                String[] split = b.getReserveeName().split(" ");
+                passenger.addProperty("firstName", split[0]);
+                if (split.length > 1) {
+                    passenger.addProperty("lastName", split[1]);
+                }
+                jArray.add(passenger);
+        }
+        else{
+            for (int i = 0; i < b.getPassengers().size(); i++) {
+                JsonObject passenger = new JsonObject();
+                String[] split = b.getPassengers().get(i).split(" ");
+                passenger.addProperty("firstName", split[0]);
+                if (split.length > 1) {
+                    passenger.addProperty("lastName", split[1]);
+                }
+                jArray.add(passenger);
             }
-            jArray.add(passenger);
-
         }
         json.add("Passengers", jArray);
 

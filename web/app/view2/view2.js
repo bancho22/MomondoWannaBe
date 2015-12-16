@@ -9,7 +9,7 @@ angular.module('myApp.view2', ['ngRoute','myApp.view1','myApp.security'])
             });
           }])
 
-        .controller('View2Ctrl', ["$scope","getuserName","getAirline","getNumOfSeats","getFlightID", "$http",function ($scope,getuserName,getAirline, getNumOfSeats,getFlightID, $http) { 
+        .controller('View2Ctrl', ["$scope","getuserName","getAirline","getNumOfSeats","getFlightID", "$http",function ($scope,getuserName,getAirline, getNumOfSeats,getFlightID, $http, $location) { 
             
     
 //    if(getNumOfSeats.numOfSeats==2){
@@ -38,7 +38,7 @@ angular.module('myApp.view2', ['ngRoute','myApp.view1','myApp.security'])
                     reserve.airlineName = getAirline.airlineName;
                     reserve.passengers = [];
                     
-                    for(var i =1;i<$scope.passengers.length;i++){
+                    for(var i =0;i<$scope.passengers.length;i++){
                           var fullName = booker.passengers[i].Name;
                           reserve.passengers.push(fullName);
                     }
@@ -50,7 +50,7 @@ angular.module('myApp.view2', ['ngRoute','myApp.view1','myApp.security'])
                         contentType: "application/json", data: JSON.stringify(reserve)}).
                             success(function (data, status, headers, config) {
                                  alert(reserve.reserveeName + ": you have booked a flight");
-                                 
+                                 $location.path("#/view4");
                                 
 
                             }).

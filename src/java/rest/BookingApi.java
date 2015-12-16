@@ -32,74 +32,69 @@ import javax.ws.rs.core.Response;
 @Path("booking")
 public class BookingApi {
 
-    
+    BookingFacade bf = new BookingFacade();
+    AirlineFacade af = new AirlineFacade();
+    UserFacade uf = new UserFacade();
+    BookEngine be = new BookEngine();
 
+    @GET
+    @Path("getBookings/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBookingsForUser(@PathParam("username") String username) {
+        //JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
+        entity.User reservee = uf.getUserByUserName(username);
+        List<Booking> books = bf.getBookingByUser(reservee);
+        Gson g = new Gson();
+        JsonArray jsonArray = new JsonArray();
+        for (entity.Booking b : books) {
+            jsonArray.add(new JsonParser().parse(g.toJson(b)));
 
-        BookingFacade bf = new BookingFacade();
-        AirlineFacade af = new AirlineFacade();
-        UserFacade uf = new UserFacade();
-        BookEngine be = new BookEngine();
+        }
 
-        @GET
-        @Path("getBookings/{username}")
-        @Produces(MediaType.APPLICATION_JSON)
-        public Response getBookingsForUser(@PathParam("username") String username) {
-          //JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
-          entity.User reservee = uf.getUserByUserName(username);
-          List<Booking> books =bf.getBookingByUser(reservee);
-          Gson g = new Gson();
-                JsonArray jsonArray = new JsonArray();
-            for (entity.Booking b : books) {
-                jsonArray.add(new JsonParser().parse(g.toJson(b)));
-                
-            }
-              
-                                
-            return Response.status(Response.Status.OK).entity(jsonArray.toString()).type(MediaType.APPLICATION_JSON).build();
-            
+        return Response.status(Response.Status.OK).entity(jsonArray.toString()).type(MediaType.APPLICATION_JSON).build();
+
 //            return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
-        }
-        @GET
-        @Path("getBookings")
-        @RolesAllowed("Admin")
-        @Produces(MediaType.APPLICATION_JSON)
-        public Response getAllBookings() {
-          //JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
-            
-          
-            
-          List<Booking> books =bf.getBookings();
-          Gson g = new Gson();
-                JsonArray jsonArray = new JsonArray();
-            for (entity.Booking b : books) {
-                jsonArray.add(new JsonParser().parse(g.toJson(b)));
-                
-            }
-              
-                                
-            return Response.status(Response.Status.OK).entity(jsonArray.toString()).type(MediaType.APPLICATION_JSON).build();
-            
-//            return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
-        }
-        @POST
-        @Consumes("application/json")
-        @Produces("application/json")
-        public Response registerBooking(String json) throws BookingException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-            JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
-            entity.User reservee = uf.getUserByUserName(obj.get("username").getAsString());
-            Airline airline = af.getAirlineByName(obj.get("airlineName").getAsString());
-            Gson g = new Gson();
-            entity.Booking b = g.fromJson(json, Booking.class);
-            b.setReservee(reservee);
-            b.setAirline(airline);
-            
-            JsonObject response = be.book(b);
-            if (response.get("code").getAsInt() == 200) {
-                bf.addBooking(b);
-            } else {
-                throw new BookingException(response.toString());
-            }
+    }
 
-            return Response.status(Response.Status.OK).entity(response.toString()).type(MediaType.APPLICATION_JSON).build();
+    @GET
+    @Path("getBookings")
+    @RolesAllowed("Admin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllBookings() {
+          //JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
+
+        List<Booking> books = bf.getBookings();
+        Gson g = new Gson();
+        JsonArray jsonArray = new JsonArray();
+        for (entity.Booking b : books) {
+            jsonArray.add(new JsonParser().parse(g.toJson(b)));
+
         }
+
+        return Response.status(Response.Status.OK).entity(jsonArray.toString()).type(MediaType.APPLICATION_JSON).build();
+
+//            return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
+    }
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response registerBooking(String json) throws BookingException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
+        entity.User reservee = uf.getUserByUserName(obj.get("username").getAsString());
+        Airline airline = af.getAirlineByName(obj.get("airlineName").getAsString());
+        Gson g = new Gson();
+        entity.Booking b = g.fromJson(json, Booking.class);
+        b.setReservee(reservee);
+        b.setAirline(airline);
+
+        JsonObject response = be.book(b);
+        if (response.get("code").getAsInt() == 200) {
+            bf.addBooking(b);
+        } else {
+            throw new BookingException(response.toString());
+        }
+
+        return Response.status(Response.Status.OK).entity(response.toString()).type(MediaType.APPLICATION_JSON).build();
+    }
 }
