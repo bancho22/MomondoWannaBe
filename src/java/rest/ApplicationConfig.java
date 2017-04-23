@@ -21,17 +21,7 @@ public class ApplicationConfig extends Application {
    * If required, comment out calling this method in getClasses().
    */
   private void addRestResourceClasses(Set<Class<?>> resources) {
-    resources.add(exceptions.BookingExceptionMapper.class);
-    resources.add(exceptions.NoFlightsFoundExceptionMapper.class);
-    resources.add(exceptions.UserAlreadyExistsExceptionMapper.class);
-    resources.add(rest.BookingApi.class);
-    resources.add(rest.FlightSearchApi.class);
-    resources.add(rest.RegisterApi.class);
-        resources.add(rest.User.class);
-        resources.add(security.JWTAuthenticationFilter.class);
-        resources.add(security.Login.class);
-        resources.add(security.NotAuthorizedExceptionMapper.class);
-        resources.add(security.RolesAllowedFilter.class);
+    resources.add(rest.LoginApi.class);
   }
   
 }
